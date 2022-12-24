@@ -1,11 +1,11 @@
 import React from 'react';
 import Carousel from 'react-bootstrap/Carousel';
-import ImgCard from '../components/imgCard';
+import ImgCard from '../components/ImgCard';
 import coffee from '../img/coffee.jpg';
 import coffeeTogo from '../img/togo.jpg';
 import beans from '../img/beans.jpg';
 
-const FeaturedItems = () => {
+const FeaturedProducts = () => {
     return ( 
     <Carousel 
     fade
@@ -34,4 +34,4 @@ const FeaturedItems = () => {
      );
 }
  
-export default FeaturedItems;
+export default FeaturedProducts;
