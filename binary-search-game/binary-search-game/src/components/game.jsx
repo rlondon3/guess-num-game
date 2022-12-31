@@ -18,7 +18,7 @@ function Github(props) {
     return (
       <Typography variant="body2" color="text.secondary" align="center" {...props}>
         {'© Binary Search Game '}
-        <Link color="inherit" href="https://mui.com/">
+        <Link color="inherit" href="https://github.com/rlondon3/guess-num-game">
           GitHub
         </Link>{' '}
         {new Date().getFullYear()}
