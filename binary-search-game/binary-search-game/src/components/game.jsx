@@ -35,7 +35,7 @@ function Github(props) {
   }
 
 
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
     
     binarySearch(numberArr, parseInt(e.target[0].value));
@@ -65,7 +65,7 @@ function Github(props) {
           count={count}
           setCount={setCount}
            />
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box component="form" onSubmit={(e) => handleSubmit(e)} noValidate sx={{ mt: 1 }}>
             <TextField
               onChange={handleChange}
               margin="normal"
