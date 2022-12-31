@@ -37,6 +37,7 @@ function sorter(a, b){
   }
 
 const attempt = (e) => {
+  
     setCount(count + 1);
     if (count === 2) {
         setAlert(true);

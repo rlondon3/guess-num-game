@@ -13,9 +13,9 @@ const Numbers = ({alert, alert2, round, numbers, count, attempt}) => {
         const idx = () => setIndex(i => i + 1);
         const change = setInterval(idx, 2000);
         if (round === false) {
+            console.log(round, 'round')
             return clearInterval(change);
         }
-        
         return () => clearInterval(change)
     }, [round]);
 
