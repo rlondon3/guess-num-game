@@ -5,7 +5,7 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 
-const Numbers = ({alert, alert2, round, numbers, winner, count, setCount, attempt}) => {
+const Numbers = ({alert, alert2, round, numbers, count, attempt}) => {
     const [index, setIndex] = React.useState(0);
     
 
@@ -19,10 +19,11 @@ const Numbers = ({alert, alert2, round, numbers, winner, count, setCount, attemp
         return () => clearInterval(change)
     }, [round]);
 
+    const border = (alert === true) ? '1px solid red' : (alert2 === true) ? '1px solid green' : ""
 
     return (
         <> 
-        <Card sx={{ maxWidth: 345 }}>
+        <Card sx={{ maxWidth: 345 }} id='numberCard' style={{border: border }}>
         {alert === true && <Alert variant="filled" severity="error" sx={{justifyContent: "center"}} >
             Sorry, you've lost!
         </Alert>}

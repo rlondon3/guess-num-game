@@ -26,7 +26,7 @@ function App() {
 
   const numberArr = [...new Set(numberArr1)].sort(sorter); // Remove duplicates and sort the array
   const winningNum = get_random(numberArr); //Establish a winning number
-  const newGame = <MuiAlert elevation={6} variant="outlined" sx={{ mb: 3}}>New Game Starting</MuiAlert>;
+  const newGame = <MuiAlert elevation={6} variant="outlined" sx={{ mb: 3}}>New Game Starting...</MuiAlert>;
 
 function get_random (arr) {
     return arr[Math.floor((Math.random()*arr.length))];
@@ -78,16 +78,12 @@ function binarySearch(arr, item ) {
     setOpen(true)
     setTimeout(() => {
       window.location.reload(false);
-    }, 3000)
+    }, 1000)
   }
 
-  React.useEffect(() => {
-    setTimeout(() => {
-      setOpen(false)
-    }, 3000)
-  }, [open])
-
   return (
+    <>
+    {open === true && newGame}
     <Container component="main" maxWidth="xs">
       <Box
           sx={{
@@ -97,7 +93,7 @@ function binarySearch(arr, item ) {
             alignItems: 'center',
           }}
         >
-        {open === true && newGame}
+        
         <Avatar sx={{ mb: 3, bgcolor: 'secondary.main', width: '20%' }}>
               <Filter1Icon />
               <LooksTwoSharpIcon />
@@ -120,6 +116,7 @@ function binarySearch(arr, item ) {
         />
      </Box>
     </Container>
+    </>
   );
 }
 

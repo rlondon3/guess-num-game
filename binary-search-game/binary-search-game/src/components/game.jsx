@@ -61,9 +61,7 @@ function Github(props) {
           alert2={alert2}
           round={round}
           numbers={numberArr}
-          winner={winningNum}
           count={count}
-          setCount={setCount}
            />
           <Box component="form" onSubmit={(e) => handleSubmit(e)} noValidate sx={{ mt: 1 }}>
             <TextField
