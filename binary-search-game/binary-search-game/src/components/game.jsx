@@ -10,7 +10,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Numbers from './numbers';
 
 
-const Game = ({ alert, alert2, round, winningNum, numberArr, count, setCount, binarySearch, attempt, playAgain }) => {
+const Game = ({ alert, alert2, round, winningNum, hint, numberArr, count, binarySearch, attempt, playAgain }) => {
 
 const theme = createTheme();
 
@@ -60,9 +60,11 @@ function Github(props) {
           alert2={alert2}
           round={round}
           numbers={numberArr}
+          winningNum={winningNum}
           count={count}
            />
           <Box component="form" onSubmit={(e) => handleSubmit(e)} noValidate sx={{ mt: 1 }}>
+          {(hint !== "") ? hint : ""}
             <TextField
               onChange={handleChange}
               margin="normal"

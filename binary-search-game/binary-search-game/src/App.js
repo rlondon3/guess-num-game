@@ -1,5 +1,7 @@
 import * as React from 'react';
 import MuiAlert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
+import Alert from '@mui/material/Alert';
 import Game from './components/game'
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
@@ -11,11 +13,6 @@ import LooksTwoSharpIcon from '@mui/icons-material/LooksTwoSharp';
 import './App.css';
 
 function App() {
-  const [open, setOpen] = React.useState(false);
-  const [count, setCount] = React.useState(0);
-  const [round, setRound] = React.useState(true);
-  const [alert, setAlert] = React.useState(false);
-  const [alert2, setAlert2] = React.useState(false);
 
   const numberArr1 = [
     Math.floor(Math.random() * 11, Math.floor(Math.random() * 10)), 
@@ -24,8 +21,21 @@ function App() {
     Math.floor(Math.random() * 3), Math.floor(Math.random() * 2), Math.floor(Math.random() * 1)
   ]; // Create array with random numbers
 
-  const numberArr = [...new Set(numberArr1)].sort(sorter); // Remove duplicates and sort the array
-  const winningNum = get_random(numberArr); //Establish a winning number
+  const numberArr2 = [...new Set(numberArr1)].sort(sorter); // Remove duplicates and sort the array
+  // eslint-disable-next-line
+  const [numberArr, setNumberArr] = React.useState(numberArr2);
+  // eslint-disable-next-line
+  const [winningNum, setWinningNum] = React.useState(get_random(numberArr))
+  const [hint, setHint] = React.useState("");
+  const [open, setOpen] = React.useState(false);
+  const [count, setCount] = React.useState(0);
+  const [round, setRound] = React.useState(true);
+  const [alert, setAlert] = React.useState(false);
+  const [alert2, setAlert2] = React.useState(false);
+
+
+
+  
   const newGame = <MuiAlert elevation={6} variant="outlined" sx={{ mb: 3}}>New Game Starting...</MuiAlert>;
 
 function get_random (arr) {
@@ -37,29 +47,59 @@ function sorter(a, b){
   }
 
 const attempt = (e) => {
-  
-    setCount(count + 1);
+      setCount(count + 1);
     if (count === 2) {
-        setAlert(true);
-        setCount(count + 1);
-        setRound(false);
-    } else if (count < 2) {
+      if (document.getElementById('guess').value === "") {
+        if (parseInt(document.getElementById('numberChoices').innerHTML) !== winningNum) {
+            setAlert(true);
+            setRound(false);
+            document.getElementById('numberChoices').style.color = 'red';
+            return document.getElementById('guess').disabled = true;
+        } else {
+          setAlert2(true)
+          setRound(false);
+          document.getElementById('numberChoices').style.color = 'green';
+          document.getElementById('guess').disabled = true;
+        }
+      }
+      if (document.getElementById('guess').value !== "") {
+        if (parseInt(document.getElementById('guess').value) !== winningNum) {
+            setAlert(true);
+            setRound(false);
+            document.getElementById('numberChoices').style.color = 'red';
+            document.getElementById('guess').disabled = true;
+        } else {
+          setAlert2(true)
+          setRound(false);
+          document.getElementById('numberChoices').style.color = 'green';
+          return document.getElementById('guess').disabled = true;
+        }
+      }
+    } 
+    if (count < 2) {
         if (parseInt(document.getElementById('guess').value) === winningNum) {
             setAlert2(true)
             setRound(false);
+            document.getElementById('numberChoices').style.color = 'green';
+            document.getElementById('guess').disabled = true;
             return;
         }
+        if (e) {
         if (parseInt(e.target.innerHTML) === winningNum) {
             setAlert2(true)
             setRound(false);
+            document.getElementById('numberChoices').style.color = 'green';
+            document.getElementById('guess').disabled = true;
             return;
         }
+      }
     }
   }
 
 function binarySearch(arr, item ) {
     let low = 0; // Establish the lowest number in the array that can be guessed
     let high = numberArr.length; //Establish the highest number in the array that can be guessed.
+
     do { //Loop until the number is found
         let mid = Math.floor((low + high) / 2); // This is to check the middle number
         const answer = arr[mid]; //Finds the number in the array if it exists
@@ -70,7 +110,29 @@ function binarySearch(arr, item ) {
             high = mid - 1; //Guess was too high, so update high
         } else {
             low = mid + 1; // Guess was too low. so update low
-        } 
+        }
+        
+        if (item < winningNum) {
+          setHint(
+            <Alert severity="info">
+            <AlertTitle>Info</AlertTitle>
+            This number is <strong>too low!</strong>
+            </Alert>
+            );
+            setTimeout(() => {
+              setHint("")
+            }, "2500");
+        } else if (item > winningNum) {
+          setHint(
+            <Alert severity="info">
+            <AlertTitle>Info</AlertTitle>
+            This number is <strong>too high!</strong>
+            </Alert>
+            );
+            setTimeout(() => {
+              setHint("")
+            }, "2500");
+        }
     } while (low <= high) 
   }
 
@@ -81,6 +143,10 @@ function binarySearch(arr, item ) {
       window.location.reload(false);
     }, 1000)
   }
+
+  React.useEffect(() => {
+  //console.log(winningNum, 'winningNum')
+  }, [hint, alert, alert2, count])
 
   return (
     <>
@@ -110,6 +176,7 @@ function binarySearch(arr, item ) {
         winningNum={winningNum}
         numberArr={numberArr}
         count={count}
+        hint={hint}
         playAgain={playAgain}
         attempt={attempt}
         setCount={setCount}
