@@ -1,5 +1,3 @@
-# React-Guess-Num-Game
-
 # Getting Started with Guess the Number Game
 
 This game makes use of the Binaray Search Algorithm to quickly find the player's number in the array <br /> 
