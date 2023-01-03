@@ -1,4 +1,4 @@
-# React-Todo-App
+# React-Guess-Num-Game
 
 # Getting Started with Guess the Number Game
 
