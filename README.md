@@ -3,8 +3,7 @@
 This game makes use of the Binaray Search Algorithm to quickly find the player's number in the array <br /> 
 of numbers given for players to make their guesses.
 
-##Play this Game Now
-[Guess Number Game](http://binary-search-guessing-game.surge.sh/) 
+## [Play this Game Now](http://binary-search-guessing-game.surge.sh/) 
 
 ## Scripts
 
