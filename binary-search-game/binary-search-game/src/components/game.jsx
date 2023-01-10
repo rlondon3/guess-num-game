@@ -10,7 +10,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Numbers from './numbers';
 
 
-const Game = ({ alert, alert2, round, winningNum, hint, numberArr, count, binarySearch, attempt, playAgain }) => {
+const Game = ({ alert, alert2, round, winningNum, hint, numberArr, count, hints, binarySearch, attempt, playAgain }) => {
 
 const theme = createTheme();
 
@@ -36,7 +36,7 @@ function Github(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+    hints(parseInt(e.target[0].value), winningNum);
     binarySearch(numberArr, parseInt(e.target[0].value));
     attempt()
   }
@@ -64,7 +64,7 @@ function Github(props) {
           count={count}
            />
           <Box component="form" onSubmit={(e) => handleSubmit(e)} noValidate sx={{ mt: 1 }}>
-          {(hint !== "") ? hint : ""}
+          {(hint) ? hint : ""}
             <TextField
               onChange={handleChange}
               margin="normal"

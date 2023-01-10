@@ -96,6 +96,30 @@ const attempt = (e) => {
     }
   }
 
+function hints(guess, correct) {
+  if (guess < correct) {
+    setHint(
+      <Alert severity="info">
+      <AlertTitle>Info</AlertTitle>
+      This number is <strong>too low!</strong>
+      </Alert>
+      );
+      setTimeout(() => {
+        setHint("")
+      }, "2500");
+  } else if (guess > correct) {
+    setHint(
+      <Alert severity="info">
+      <AlertTitle>Info</AlertTitle>
+      This number is <strong>too high!</strong>
+      </Alert>
+      );
+      setTimeout(() => {
+        setHint("")
+      }, "2500");
+  }
+}
+
 function binarySearch(arr, item ) {
     let low = 0; // Establish the lowest number in the array that can be guessed
     let high = numberArr.length; //Establish the highest number in the array that can be guessed.
@@ -110,28 +134,6 @@ function binarySearch(arr, item ) {
             high = mid - 1; //Guess was too high, so update high
         } else {
             low = mid + 1; // Guess was too low. so update low
-        }
-        
-        if (item < winningNum) {
-          setHint(
-            <Alert severity="info">
-            <AlertTitle>Info</AlertTitle>
-            This number is <strong>too low!</strong>
-            </Alert>
-            );
-            setTimeout(() => {
-              setHint("")
-            }, "2500");
-        } else if (item > winningNum) {
-          setHint(
-            <Alert severity="info">
-            <AlertTitle>Info</AlertTitle>
-            This number is <strong>too high!</strong>
-            </Alert>
-            );
-            setTimeout(() => {
-              setHint("")
-            }, "2500");
         }
     } while (low <= high) 
   }
@@ -177,6 +179,7 @@ function binarySearch(arr, item ) {
         numberArr={numberArr}
         count={count}
         hint={hint}
+        hints={hints}
         playAgain={playAgain}
         attempt={attempt}
         setCount={setCount}
